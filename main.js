@@ -21,6 +21,7 @@ jobType.addEventListener('change', function () {
 })
 
 
+
 const promoCode = document.getElementById('form-promo')
 
 const discounts = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
@@ -36,6 +37,25 @@ subBtn.addEventListener('click', function (event) {
     /*
     inserire validazione qui
     */
+    // const jobType = document.getElementById('form-job')
+    // const nameInput = document.getElementById('form-name')
+    // const surnameInput = document.getElementById('form-surname')
+    // const mailInput = document.getElementById('form-mail')
+    // const privacyCheck = document.getElementById('privacy-check')
+    // const inputArr = [nameInput, surnameInput, mailInput, privacyCheck, jobType]
+
+    // inputArr.forEach(function (field) {
+    //     if (!field.checkValidity()) {
+    //         field.classList.add('border-danger')
+    //         console.log(field)
+    //         console.log(field.checkValidity())
+    //     } else {
+    //         field.classList.add('border-success')
+    //         console.log(field)
+    //         console.log(field.checkValidity())
+    //     }
+
+    // })
 
     let discount = 0
 
