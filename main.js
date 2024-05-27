@@ -20,6 +20,12 @@ jobType.addEventListener('change', function () {
     }
 })
 
+
+const promoCode = document.getElementById('form-promo')
+
+const discounts = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
+
+
 const subBtn = document.getElementById('subBtn') //prendo elemento submit button dal DOM
 const priceDiv = document.getElementById('price-div') //prendo div che contine la sezione prezzo dal DOM
 const finalPrice = document.getElementById('final-price') //prendo elemento span con prezzo finale dal DOM
@@ -31,9 +37,13 @@ subBtn.addEventListener('click', function (event) {
     inserire validazione qui
     */
 
-    let jobPrice = jobCost * jobTime //calcolo il prezzo del lavoro al lordo di sconti
+    let discount = 0
 
-    console.log(jobPrice.toFixed(2))
+    if (discounts.includes((promoCode.value).toUpperCase())) {
+        discount = 0.25
+    }
+
+    let jobPrice = (jobCost * jobTime) - (jobCost * jobTime * discount) //calcolo il prezzo del lavoro al netto di sconti
 
     finalPrice.innerText = jobPrice.toFixed(2) //stampo in pagina il prezzo jobPrice
     priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
