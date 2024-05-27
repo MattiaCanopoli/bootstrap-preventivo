@@ -94,21 +94,22 @@
                         </div>
                     </div>
                     <!-- /form-job selection -->
-
+                    <!-- text-area section -->
                     <div>
                         <label for="form-comments" class="form-label">Inserisci un messaggio</label>
-                        <!-- <input type="text-area" class="form-control" id="form-comments"> -->
-
                         <textarea id="form-comments" class="form-control" rows="5"></textarea>
                     </div>
-
+                    <!-- /text-area section -->
+                    <!-- form-promo code -->
                     <div>
                         <label for="form-promo" class="form-label">Codice Promozionale (opzionale)</label>
                         <input type="text" class="form-control" id="form-promo">
                         <div class="invalid-feedback">
-                            Inserire il nome
+                            Il codice inserito non è valido
                         </div>
                     </div>
+                    <!-- form-promo code -->
+                    <!-- form-privacy checkbox -->
                     <div class="col-12">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="privacy-check" required>
@@ -120,10 +121,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row jusitfy-space-beetween text-center g-3">
+                    <!-- form-privacy checkbox -->
+                    <!-- submit + price row -->
+                    <div class="row text-center g-3">
+                        <!-- submit button -->
                         <div class="col-12 col-lg-6">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" type="submit">Calcola preventivo</button>
                         </div>
+                        <!-- /submit button -->
+                        <!-- price column -->
                         <div class="col-12 col-lg-6">
                             <div>
                                 <strong class="fs-5">Prezzo finale</strong>
@@ -133,31 +139,28 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- price column -->
                     </div>
+                    <!-- /submit + price row -->
                 </form>
 
             </div>
             <!-- /left column with form -->
             <!-- right column with card -->
-            <div class="col-12 col-lg-4 mt-4">
+            <div class="col-12 col-lg-4 mt-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the
-                            bulk
-                            of the card's
-                            content.</p>
-                    </div>
+                    <img src="img/dummy_logo.png" class="card-img-top" alt="immagine con logo">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item fs-6">
+                            <div class=" fw-medium fs-5">I nostri contatti</div>
+                            <div>Se hai bisogno di aiuto puoi contattarci:</div>
+                        </li>
+                        <li class=" list-group-item">help@boolfactory.test</li>
+                        <li class="list-group-item">+1122334455</li>
+                        <li class="list-group-item">
+                            <a href="#" class="card-link">Help desk</a>
+                        </li>
                     </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
                 </div>
             </div>
             <!-- right column with card -->
