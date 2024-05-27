@@ -6,4 +6,10 @@
 - [x] finire la card
 - [x] allineare la card al centro su mobile
 - [x] ~~varificare shrink/grow~~
+- [ ] verificare posizione del footer in modalità desktop
+
+## JAVASCRIPT
+
 - [ ] verificare validazione bootstrap. posso usare la loro validazione solo parzialmente?
+- [ ] validare codice promo - se vuoto=OK; se esiste (array?)=OK + sconto; se non esite=KO
+- [ ] non validare textarea (?)
