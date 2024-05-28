@@ -34,11 +34,11 @@ jobType.addEventListener('change', function () {
 subBtn.addEventListener('click', function (event) {
     event.preventDefault() //blocco l'esecuzione default del submit per il prompt
 
-    let verificationArray = [] //creo un array vuoto per accogliere i valori true/false della funzione dataValidation
+    const verificationArray = [] //creo un array vuoto per accogliere i valori true/false della funzione dataValidation
 
     dataValidation(validationArray, verificationArray) //invoco la funzione dataValidation
 
-    let discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc
+    const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc
 
     let output = 0 //definisco la variabile output, con valore default = 0
 
@@ -54,7 +54,7 @@ subBtn.addEventListener('click', function (event) {
 //definisco la funzione per verificare la validità di campi inseriti in inputArray. per ogni campo, viene pushato true o false in outputArray
 function dataValidation(inputArray, outputArray) {
 
-    //rimuovo le classi bootstrap .is-valid e is-invalid
+    //rimuovo le classi bootstrap is-valid e is-invalid
     inputArray.forEach(function (input) {
         input.classList.remove('is-invalid')
         input.classList.remove('is-valid')
@@ -65,7 +65,7 @@ function dataValidation(inputArray, outputArray) {
             input.classList.add('is-invalid')
             outputArray.push(false) //pusho false in outputArray
         } else {
-            input.classList.add('is-valid') //altrimenti aggiungo la classe bootstra is-valid all'elemento di input
+            input.classList.add('is-valid') //altrimenti aggiungo la classe bootstrap is-valid all'elemento di input
             outputArray.push(true) //pusho true in outputArray
         }
     })
@@ -76,7 +76,7 @@ function dataValidation(inputArray, outputArray) {
  La funzione determina inoltre la percentuale di sconto da applicare, salvata nella variabile discount*/
 function promoCodeCalc(inputCode, discountCodesArray) {
 
-    //rimuovo le classi bootstra .is-valid e is-invalid
+    //rimuovo le classi bootstrap .is-valid e is-invalid
     inputCode.classList.remove('is-invalid')
     inputCode.classList.remove('is-valid')
 
