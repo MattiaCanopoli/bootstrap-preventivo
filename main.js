@@ -34,10 +34,7 @@ jobType.addEventListener('change', function () {
 subBtn.addEventListener('click', function (event) {
     event.preventDefault() //blocco l'esecuzione default del submit per il prompt
 
-    const verificationArray = [] //creo un array vuoto per accogliere i valori true/false della funzione dataValidation
-
-    dataValidation(validationArray, verificationArray) //invoco la funzione dataValidation
-
+    const verificationArray = dataValidation(validationArray)//creo una variabile in cui valore è determinato dalla funzione dataValidation
     const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc
 
     let output = 0 //definisco la variabile output, con valore default = 0
@@ -52,13 +49,16 @@ subBtn.addEventListener('click', function (event) {
 })
 
 //definisco la funzione per verificare la validità di campi inseriti in inputArray. per ogni campo, viene pushato true o false in outputArray
-function dataValidation(inputArray, outputArray) {
+function dataValidation(inputArray) {
 
     //rimuovo le classi bootstrap is-valid e is-invalid
     inputArray.forEach(function (input) {
         input.classList.remove('is-invalid')
         input.classList.remove('is-valid')
     })
+
+    const outputArray = [] //creo array vuoto in cui saranno inseriti i valori true/false dal ciclo forEach
+
     //ciclo forEach per determinare se gli input sono validi
     inputArray.forEach(function (input) {
         if (!input.checkValidity()) { //se checkValidity restituisce false aggiugo la classe is-invalid all'elemento di input
@@ -69,6 +69,7 @@ function dataValidation(inputArray, outputArray) {
             outputArray.push(true) //pusho true in outputArray
         }
     })
+    return outputArray //ritorno output array
 }
 
 /*definisco una funzione per verificare se il codice promo inputCode inserito è presente nell'array discountCodesArray, quindi valido.
