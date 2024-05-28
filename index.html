@@ -55,16 +55,16 @@
                     <!-- form-name -->
                     <div>
                         <label for="form-name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="form-name" required>
+                        <input type="text" class="form-control cust-validation" id="form-name" required>
                         <div class="invalid-feedback">
                             Inserire il nome
                         </div>
                     </div>
-                    <!-- form-/name -->
+                    <!-- /form-name -->
                     <!-- form-surname -->
                     <div>
                         <label for="form-surname" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" id="form-surname" required>
+                        <input type="text" class="form-control cust-validation" id="form-surname" required>
                         <div class="invalid-feedback">
                             Inserire il cognome
                         </div>
@@ -73,7 +73,7 @@
                     <!-- form-email -->
                     <div>
                         <label for="form-mail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="form-mail" required>
+                        <input type="email" class="form-control cust-validation" id="form-mail" required>
                         <div class="invalid-feedback">
                             Inserire un indirizzo e-mail valido
                         </div>
@@ -83,7 +83,7 @@
 
                     <div>
                         <label for="form-job" class="form-label">Tipo di lavoro</label>
-                        <select class="form-select" id='form-job' required>
+                        <select class="form-select cust-validation" id='form-job' required>
                             <option selected disabled value="">Seleziona il tipo di lavoro</option>
                             <option value="back">Backed Development</option>
                             <option value="front">Frontend Development</option>
@@ -112,7 +112,8 @@
                     <!-- form-privacy checkbox -->
                     <div class="col-12">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="privacy-check" required>
+                            <input class="form-check-input cust-validation" type="checkbox" value="" id="privacy-check"
+                                required>
                             <label class="form-check-label" for="privacy-check">
                                 Accetto la Privacy Policy
                             </label>
@@ -133,9 +134,9 @@
                         <div class="col-12 col-lg-6">
                             <div id="price-div" class="d-none">
                                 <strong class="fs-5">Prezzo finale</strong>
-                                <div class="fs-4">
-                                    <strong>€</strong>
-                                    <span id="final-price"></span>
+                                <div class="d-flex justify-content-center align-items-baseline">
+                                    <span class="fs-3 fw-bold" id="final-price"></span>
+                                    <span class="fs-4 text-secondary" id="final-price-dec"></span>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +179,9 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <!-- /bootstrap js -->
+    <!-- custom js -->
     <script src="main.js"></script>
+    <!-- /custom js -->
 </body>
 
 </html>
