@@ -34,16 +34,23 @@ jobType.addEventListener('change', function () {
 subBtn.addEventListener('click', function (event) {
     event.preventDefault() //blocco l'esecuzione default del submit per il prompt
 
-    const verificationArray = dataValidation(validationArray)//creo una variabile in cui valore è determinato dalla funzione dataValidation
-    const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc
+    const verificationArray = dataValidation(validationArray)//creo una variabile in cui valore è determinato dalla funzione dataValidation. constesualmente viene fatta la validazione dei campi di imput required
+    const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc. contestualmente viene fatta la validazione del capo form-promo
 
     let output = 0 //definisco la variabile output, con valore default = 0
 
     if (!verificationArray.includes(false)) { //verifico che all'interno di verificationArray non ci siano valori false
         output = (jobCost * jobTime) - (jobCost * jobTime * (discount / 100)) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
-        const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa ottenuta al punto
+        const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa così ottenuta al punto, ricavando un array da 2 elementi
+
+        //riduco i centesimi a 0 
+        let decimal = outputArr[1] //assegno il secondo elemento dell'array (i decimali) ad una varibile
+        if (Number(decimal) !== 0) {
+            decimal = (Math.floor(Number(outputArr[1]) / 10) * 10) //traformo i decimali in un numero decimale e lo arrotondo per difetto. lo moltiplico poi per 10 per ottenere due cifre
+        }
+
         finalPrice.innerText = `€ ${outputArr[0]}` //stampo in pagina il prezzo output
-        finalPriceDec.innerText = `,${outputArr[1]}` //stampo in pagina i decimali del prezzo output
+        finalPriceDec.innerText = `,${decimal}` //stampo in pagina i decimali del prezzo output
         priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
     }
 })
