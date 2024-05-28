@@ -93,14 +93,12 @@ function promoCodeCalc(inputCode, discountCodesArray) {
     if (discountCodesArray.includes(inputCode.value.toUpperCase())) {
         inputCode.classList.add('is-valid') //se inputCode è vuoto o presente in discountCodesArray aggiungo classe bootstrap is-valid all'input
         discount = 25 //assegno la percentuale di sconto alla variabile discount
-        return discount  //ritorno discount
 
     } else if (inputCode.value === '') {
         inputCode.classList.add('is-valid') //se inputCode è vuoto o presente in discountCodesArray aggiungo classe bootstrap is-valid all'input
-        return discount //ritorno discount = al valore default (0). nessuno sconto applicato
 
     } else {
         inputCode.classList.add('is-invalid') //altrimenti aggiungo classe bootstrap is-invalid
-        return discount //ritorno discount = al valore default (0). nessuno sconto applicato
     }
+    return discount
 }
