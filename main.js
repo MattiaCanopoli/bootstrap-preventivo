@@ -43,13 +43,13 @@ subBtn.addEventListener('click', function (event) {
     let discount = 0 //definisco la variabile discount, con valore default = 0
 
     if (discounts.includes((promoCode.value).toUpperCase())) { //verifico che il codice promo inserito sia valido. assegno valore 0.25 alla variabile discount
-        discount = 0.25
+        discount = 25
     }
 
     let output = 0 //definisco la variabile output, con valore default = 0
 
     if (!verificationArray.includes(false)) { //verifico che all'interno di verificationArray non ci siano valori false
-        output = (jobCost * jobTime) - (jobCost * jobTime * discount) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
+        output = (jobCost * jobTime) - (jobCost * jobTime * (discount / 100)) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
         const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa ottenuta al punto
         finalPrice.innerText = `€ ${outputArr[0]}` //stampo in pagina il prezzo output
         finalPriceDec.innerText = `,${outputArr[1]}` //stampo in pagina i decimali del prezzo output
