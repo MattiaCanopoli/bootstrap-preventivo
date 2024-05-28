@@ -1,6 +1,6 @@
 'use strict'
-//prendo elemento select dal DOM
-const jobType = document.getElementById('form-job')
+
+const jobType = document.getElementById('form-job') //prendo elemento select dal DOM
 const promoCode = document.getElementById('form-promo') //prendo l'elemento promo code dal DOM
 
 const subBtn = document.getElementById('subBtn') //prendo elemento submit button dal DOM
@@ -38,13 +38,7 @@ subBtn.addEventListener('click', function (event) {
 
     dataValidation(validationArray, verificationArray) //invoco la funzione dataValidation
 
-    promoCodeValidation(promoCode, discounts) //invoco la funzione promoCodeValidation
-
-    let discount = 0 //definisco la variabile discount, con valore default = 0
-
-    if (discounts.includes((promoCode.value).toUpperCase())) { //verifico che il codice promo inserito sia valido. assegno valore 0.25 alla variabile discount
-        discount = 25
-    }
+    let discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc
 
     let output = 0 //definisco la variabile output, con valore default = 0
 
@@ -59,11 +53,13 @@ subBtn.addEventListener('click', function (event) {
 
 //definisco la funzione per verificare la validità di campi inseriti in inputArray. per ogni campo, viene pushato true o false in outputArray
 function dataValidation(inputArray, outputArray) {
-    //rimuovo le classi bootstra .is-valid e is-invalid
+
+    //rimuovo le classi bootstrap .is-valid e is-invalid
     inputArray.forEach(function (input) {
         input.classList.remove('is-invalid')
         input.classList.remove('is-valid')
     })
+    //ciclo forEach per determinare se gli input sono validi
     inputArray.forEach(function (input) {
         if (!input.checkValidity()) { //se checkValidity restituisce false aggiugo la classe is-invalid all'elemento di input
             input.classList.add('is-invalid')
@@ -76,15 +72,27 @@ function dataValidation(inputArray, outputArray) {
 }
 
 /*definisco una funzione per verificare se il codice promo inputCode inserito è presente nell'array discountCodesArray, quindi valido.
- se non viene inserito alcun codice, il campo sarà considerato valido */
-function promoCodeValidation(inputCode, discountCodesArray) {
+ se non viene inserito alcun codice, il campo sarà considerato valido 
+ La funzione determina inoltre la percentuale di sconto da applicare, salvata nella variabile discount*/
+function promoCodeCalc(inputCode, discountCodesArray) {
+
     //rimuovo le classi bootstra .is-valid e is-invalid
     inputCode.classList.remove('is-invalid')
     inputCode.classList.remove('is-valid')
 
-    if ((discountCodesArray.includes(inputCode.value.toUpperCase()) || (inputCode.value === ''))) {
+    let discount = 0 //definisco una variabile discount con valore default di 0 (nessuno sconto applicato)
+
+    if (discountCodesArray.includes(inputCode.value.toUpperCase())) {
         inputCode.classList.add('is-valid') //se inputCode è vuoto o presente in discountCodesArray aggiungo classe bootstrap is-valid all'input
+        discount = 25 //assegno la percentuale di sconto alla variabile discount
+        return discount  //ritorno discount
+
+    } else if (inputCode.value === '') {
+        inputCode.classList.add('is-valid') //se inputCode è vuoto o presente in discountCodesArray aggiungo classe bootstrap is-valid all'input
+        return discount //ritorno discount = al valore default (0). nessuno sconto applicato
+
     } else {
         inputCode.classList.add('is-invalid') //altrimenti aggiungo classe bootstrap is-invalid
+        return discount //ritorno discount = al valore default (0). nessuno sconto applicato
     }
 }
