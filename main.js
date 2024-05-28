@@ -1,11 +1,22 @@
 'use strict'
 //prendo elemento select dal DOM
 const jobType = document.getElementById('form-job')
+const promoCode = document.getElementById('form-promo') //prendo l'elemento promo code dal DOM
+
+const subBtn = document.getElementById('subBtn') //prendo elemento submit button dal DOM
+const priceDiv = document.getElementById('price-div') //prendo div che contine la sezione prezzo dal DOM
+const finalPrice = document.getElementById('final-price') //prendo elemento span con prezzo finale dal DOM
+const finalPriceDec = document.getElementById('final-price-dec') //prendo elemento span con prezzo finale dal DOM
+
+const validationElement = document.querySelectorAll('.cust-validation') //prendo dal DOM tutti gli elementi con classe .cust-validation (che richiedono validazione)
+const validationArray = Array.from(validationElement) //creo un array contenente tutti gli elementi del dom con classe .cust-validation
 
 let jobCost // creo una variabile jobCost per determinare il costo orario a seconda del valore di job
 let jobTime // creo una variabile jobTime per determinare il tempo di lavoro a seconda del valore di job
 
-//entrambe le variabili cambieranno valore al cambiare della selezione del tipo di lavoro
+const discounts = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24'] //creo un array contenente tutti i promo code validi
+
+//le variabili jobCost e jobTime cambiano valore in funzione di jobType
 jobType.addEventListener('change', function () {
 
     if (jobType.value === 'back') {
@@ -20,52 +31,60 @@ jobType.addEventListener('change', function () {
     }
 })
 
-
-
-const promoCode = document.getElementById('form-promo')
-
-const discounts = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
-
-
-const subBtn = document.getElementById('subBtn') //prendo elemento submit button dal DOM
-const priceDiv = document.getElementById('price-div') //prendo div che contine la sezione prezzo dal DOM
-const finalPrice = document.getElementById('final-price') //prendo elemento span con prezzo finale dal DOM
-
 subBtn.addEventListener('click', function (event) {
     event.preventDefault() //blocco l'esecuzione default del submit per il prompt
 
-    /*
-    inserire validazione qui
-    */
-    // const jobType = document.getElementById('form-job')
-    // const nameInput = document.getElementById('form-name')
-    // const surnameInput = document.getElementById('form-surname')
-    // const mailInput = document.getElementById('form-mail')
-    // const privacyCheck = document.getElementById('privacy-check')
-    // const inputArr = [nameInput, surnameInput, mailInput, privacyCheck, jobType]
+    let verificationArray = [] //creo un array vuoto per accogliere i valori true/false della funzione dataValidation
 
-    // inputArr.forEach(function (field) {
-    //     if (!field.checkValidity()) {
-    //         field.classList.add('border-danger')
-    //         console.log(field)
-    //         console.log(field.checkValidity())
-    //     } else {
-    //         field.classList.add('border-success')
-    //         console.log(field)
-    //         console.log(field.checkValidity())
-    //     }
+    dataValidation(validationArray, verificationArray) //invoco la funzione dataValidation
 
-    // })
+    promoCodeValidation(promoCode, discounts) //invoco la funzione promoCodeValidation
 
-    let discount = 0
+    let discount = 0 //definisco la variabile discount, con valore default = 0
 
-    if (discounts.includes((promoCode.value).toUpperCase())) {
+    if (discounts.includes((promoCode.value).toUpperCase())) { //verifico che il codice promo inserito sia valido. assegno valore 0.25 alla variabile discount
         discount = 0.25
     }
 
-    let jobPrice = (jobCost * jobTime) - (jobCost * jobTime * discount) //calcolo il prezzo del lavoro al netto di sconti
+    let output = 0 //definisco la variabile output, con valore default = 0
 
-    finalPrice.innerText = jobPrice.toFixed(2) //stampo in pagina il prezzo jobPrice
-    priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
-
+    if (!verificationArray.includes(false)) { //verifico che all'interno di verificationArray non ci siano valori false
+        output = (jobCost * jobTime) - (jobCost * jobTime * discount) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
+        const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa ottenuta al punto
+        finalPrice.innerText = `€ ${outputArr[0]}` //stampo in pagina il prezzo output
+        finalPriceDec.innerText = `,${outputArr[1]}` //stampo in pagina i decimali del prezzo output
+        priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
+    }
 })
+
+//definisco la funzione per verificare la validità di campi inseriti in inputArray. per ogni campo, viene pushato true o false in outputArray
+function dataValidation(inputArray, outputArray) {
+    //rimuovo le classi bootstra .is-valid e is-invalid
+    inputArray.forEach(function (input) {
+        input.classList.remove('is-invalid')
+        input.classList.remove('is-valid')
+    })
+    inputArray.forEach(function (input) {
+        if (!input.checkValidity()) { //se checkValidity restituisce false aggiugo la classe is-invalid all'elemento di input
+            input.classList.add('is-invalid')
+            outputArray.push(false) //pusho false in outputArray
+        } else {
+            input.classList.add('is-valid') //altrimenti aggiungo la classe bootstra is-valid all'elemento di input
+            outputArray.push(true) //pusho true in outputArray
+        }
+    })
+}
+
+/*definisco una funzione per verificare se il codice promo inputCode inserito è presente nell'array discountCodesArray, quindi valido.
+ se non viene inserito alcun codice, il campo sarà considerato valido */
+function promoCodeValidation(inputCode, discountCodesArray) {
+    //rimuovo le classi bootstra .is-valid e is-invalid
+    inputCode.classList.remove('is-invalid')
+    inputCode.classList.remove('is-valid')
+
+    if ((discountCodesArray.includes(inputCode.value.toUpperCase()) || (inputCode.value === ''))) {
+        inputCode.classList.add('is-valid') //se inputCode è vuoto o presente in discountCodesArray aggiungo classe bootstrap is-valid all'input
+    } else {
+        inputCode.classList.add('is-invalid') //altrimenti aggiungo classe bootstrap is-invalid
+    }
+}
