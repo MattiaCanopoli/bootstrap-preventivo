@@ -34,12 +34,11 @@ jobType.addEventListener('change', function () {
 subBtn.addEventListener('click', function (event) {
     event.preventDefault() //blocco l'esecuzione default del submit per il prompt
 
-    const verificationArray = dataValidation(validationArray)//creo una variabile in cui valore è determinato dalla funzione dataValidation. constesualmente viene fatta la validazione dei campi di imput required
     const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc. contestualmente viene fatta la validazione del capo form-promo
 
     let output = 0 //definisco la variabile output, con valore default = 0
 
-    if (!verificationArray.includes(false)) { //verifico che all'interno di verificationArray non ci siano valori false
+    if (!dataValidation(validationArray).includes(false)) { //effettuo la validazione dei campi di input. se nessuno è false, procedo con calcolo e stampa in pagina
         output = (jobCost * jobTime) - (jobCost * jobTime * (discount / 100)) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
         const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa così ottenuta al punto, ricavando un array da 2 elementi
 
@@ -52,31 +51,36 @@ subBtn.addEventListener('click', function (event) {
         finalPrice.innerText = `€ ${outputArr[0]}` //stampo in pagina il prezzo output
         finalPriceDec.innerText = `,${decimal}` //stampo in pagina i decimali del prezzo output
         priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
+
+    } else {
+        priceDiv.classList.add('d-none') //aggiungo la classe d-none per mostrare l'elemento in pagina
     }
 })
 
-//definisco la funzione per verificare la validità di campi inseriti in inputArray. per ogni campo, viene pushato true o false in outputArray
+//definisco la funzione per verificare la validità di campi inseriti in inputArray. la funzione restituisce un array di bool
 function dataValidation(inputArray) {
 
-    //rimuovo le classi bootstrap is-valid e is-invalid
-    inputArray.forEach(function (input) {
+    /*definisco una variabile che sarà popolata con i valori booleani restituiti da map.
+    ad ogni iterazione viene:
+    1.rimossa l'eventuale validazione precedente
+    2.verificata la validità di input
+    3.aggiunta una classe bootstrap che mostra la validazione in pagina*/
+
+    const outputArray = inputArray.map(function (input, index, array) {
+
+        //rimuovo le classi bootstrap is-valid e is-invalid per resettare eventuali validazioni preesistenti
         input.classList.remove('is-invalid')
         input.classList.remove('is-valid')
-    })
 
-    const outputArray = [] //creo array vuoto in cui saranno inseriti i valori true/false dal ciclo forEach
-
-    //ciclo forEach per determinare se gli input sono validi
-    inputArray.forEach(function (input) {
         if (!input.checkValidity()) { //se checkValidity restituisce false aggiugo la classe is-invalid all'elemento di input
             input.classList.add('is-invalid')
-            outputArray.push(false) //pusho false in outputArray
         } else {
             input.classList.add('is-valid') //altrimenti aggiungo la classe bootstrap is-valid all'elemento di input
-            outputArray.push(true) //pusho true in outputArray
         }
+
+        return input.checkValidity()
     })
-    return outputArray //ritorno output array
+    return outputArray
 }
 
 /*definisco una funzione per verificare se il codice promo inputCode inserito è presente nell'array discountCodesArray, quindi valido.
