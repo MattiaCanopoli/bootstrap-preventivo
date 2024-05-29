@@ -20,5 +20,6 @@
 - [x] Procedere con calcolo e stampa del prezzo solo se la validazione è 100% positiva
 
 ## BONUS
-- [ ] creare array di oggetti da inserire dinamicamente nella select
-- [ ] inserire con InnerHTML e ciclo
+- [x] creare array di oggetti da inserire dinamicamente nella select
+- [ ] ~~inserire con InnerHTML e ciclo~~
+- [ ] verificare inserimento valore default con attrivuti disabled e selected
