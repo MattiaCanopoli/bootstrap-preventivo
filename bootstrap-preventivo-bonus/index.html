@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- /bootstrap CSS-->
+    <title>Richiesta Preventivo</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <header>
+        <nav class=" navbar navbar-expand-lg bg-dark px-md-5">
+            <div class="container-fluid">
+                <!-- logo -->
+                <a class="navbar-brand text-light" href="#">Bool Factory</a>
+                <!-- hamburger button -->
+                <button class="navbar-toggler navbar-dark border border-secondary" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- navbar items -->
+                <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#">Servizi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#">Contatti</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- /navbar -->
+    <!-- main content -->
+    <main class="container">
+
+        <div class="row mt-4 ">
+            <!-- left column with form -->
+            <div class="col-12 col-sm-8">
+                <h1>Richiesta preventivo</h1>
+                <p>Compila il form per ricevere un preventivo per i nostri servizi di sviluppo</p>
+
+                <form class="row g-3 needs-validation" novalidate>
+                    <!-- form-name -->
+                    <div>
+                        <label for="form-name" class="form-label">Nome</label>
+                        <input type="text" class="form-control cust-validation" id="form-name" required>
+                        <div class="invalid-feedback">
+                            Inserire il nome
+                        </div>
+                    </div>
+                    <!-- /form-name -->
+                    <!-- form-surname -->
+                    <div>
+                        <label for="form-surname" class="form-label">Cognome</label>
+                        <input type="text" class="form-control cust-validation" id="form-surname" required>
+                        <div class="invalid-feedback">
+                            Inserire il cognome
+                        </div>
+                    </div>
+                    <!-- /form-surname -->
+                    <!-- form-email -->
+                    <div>
+                        <label for="form-mail" class="form-label">Email</label>
+                        <input type="email" class="form-control cust-validation" id="form-mail" required>
+                        <div class="invalid-feedback">
+                            Inserire un indirizzo e-mail valido
+                        </div>
+                    </div>
+                    <!-- /form-email -->
+                    <!-- form-job selection -->
+
+                    <div>
+                        <label for="form-job" class="form-label">Tipo di lavoro</label>
+                        <select class="form-select cust-validation" id='form-job' required>
+                            <option selected disabled value="">Seleziona il tipo di lavoro</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Scegliere un lavoro dal menù
+                        </div>
+                    </div>
+                    <!-- /form-job selection -->
+                    <!-- text-area section -->
+                    <div>
+                        <label for="form-comments" class="form-label">Inserisci un messaggio</label>
+                        <textarea id="form-comments" class="form-control" rows="5"></textarea>
+                    </div>
+                    <!-- /text-area section -->
+                    <!-- form-promo code -->
+                    <div>
+                        <label for="form-promo" class="form-label">Codice Promozionale (opzionale)</label>
+                        <input type="text" class="form-control" id="form-promo">
+                        <div class="invalid-feedback">
+                            Il codice inserito non è valido
+                        </div>
+                    </div>
+                    <!-- form-promo code -->
+                    <!-- form-privacy checkbox -->
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input cust-validation" type="checkbox" value="" id="privacy-check"
+                                required>
+                            <label class="form-check-label" for="privacy-check">
+                                Accetto la Privacy Policy
+                            </label>
+                            <div class="invalid-feedback">
+                                Devi accettare la privacy policy per proseguire
+                            </div>
+                        </div>
+                    </div>
+                    <!-- form-privacy checkbox -->
+                    <!-- submit + price row -->
+                    <div class="row text-center align-items-center g-3">
+                        <!-- submit button -->
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-primary" type="submit" id="subBtn">Calcola preventivo</button>
+                        </div>
+                        <!-- /submit button -->
+                        <!-- price column -->
+                        <div class="col-12 col-sm-6">
+                            <div id="price-div" class="d-none">
+                                <strong class="fs-5">Prezzo finale</strong>
+                                <div class="d-flex justify-content-center align-items-baseline">
+                                    <span class="fs-3 fw-bold" id="final-price"></span>
+                                    <span class="fs-4 text-secondary" id="final-price-dec"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- price column -->
+                    </div>
+                    <!-- /submit + price row -->
+                </form>
+
+            </div>
+            <!-- /left column with form -->
+            <!-- right column with card -->
+            <div class="col-12 col-sm-4 mt-4  h-100">
+                <div class="card">
+                    <img src="../img/dummy_logo.png" class="card-img-top" alt="immagine con logo">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item fs-6">
+                            <div class=" fw-medium fs-5">I nostri contatti</div>
+                            <div>Se hai bisogno di aiuto puoi contattarci:</div>
+                        </li>
+                        <li class=" list-group-item">help@boolfactory.test</li>
+                        <li class="list-group-item">+1122334455</li>
+                        <li class="list-group-item">
+                            <a href="#" class="card-link">Help desk</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- right column with card -->
+        </div>
+    </main>
+    <!-- /main content -->
+
+    <!-- footer -->
+    <footer class="footer mt-5 py-4 bg-dark text-center">
+        <span class="text-light">&copy; 2024 - Tutti i diritti riservati</span>
+    </footer>
+    <!-- /footer -->
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- /bootstrap js -->
+    <!-- custom js -->
+    <script src="main.js"></script>
+    <!-- /custom js -->
+</body>
+
+</html>
