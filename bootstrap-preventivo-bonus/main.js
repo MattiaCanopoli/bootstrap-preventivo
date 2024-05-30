@@ -26,15 +26,6 @@ const jobs = [
     }
 ]
 
-// jobs.forEach(function (element) {
-
-//     let opt = document.createElement('option')
-//     jobType.appendChild(opt)
-//     opt.setAttribute('value', element.value)
-//     opt.innerText = element.text
-
-// })
-
 addOptionToSelect(jobs, jobType)
 
 let jobCost = 0// creo una variabile jobCost per determinare il costo orario a seconda del valore di job
@@ -86,6 +77,7 @@ subBtn.addEventListener('click', function (event) {
 /*definisco la funzione per verificare la validità di campi inseriti di input.
 ha un parametro inputArray: un array di elementi del DOM (campi di input) da verificare
 la funzione ritorna un array di bool*/
+
 function dataValidation(inputArray) {
 
     /*definisco una variabile che sarà popolata con i valori booleani restituiti da map.
@@ -111,12 +103,12 @@ function dataValidation(inputArray) {
     return outputArray
 }
 
-
 /*definisco una funzione per verificare la validità del codice sconto inserito dall'utente e definire la percentuale di sconto
 la funzione ha due parametri: 
 1. inputCode: il codice sconto inserito dall'utente
 2. discountCodesArray: un array di codici da confrontare con il codice inputCode
 la funzione ritorna la percentuale di sconto da applicare*/
+
 function promoCodeCalc(inputCode, discountCodesArray) {
 
     //rimuovo le classi bootstrap .is-valid e is-invalid
@@ -137,11 +129,13 @@ function promoCodeCalc(inputCode, discountCodesArray) {
     }
     return discount
 }
+
 /*definisco una funzione per aggiugere tag <option> all'interno di <select> 
 i parametri della funzione sono:
 1. optionArray : un array di oggetti con chivi 'value' e 'text'
 2. selectElement: l'elemento select al quale aggiungere option
 al tag option sarà aggiunto l'attibuto value uguale al valore della chiave value dell'oggetto in optionArray e un testo ugule al valore di text */
+
 function addOptionToSelect(optionArray, selectElement) {
     optionArray.forEach(function (element) {
 

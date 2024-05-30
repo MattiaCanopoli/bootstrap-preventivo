@@ -60,6 +60,7 @@ subBtn.addEventListener('click', function (event) {
 /*definisco la funzione per verificare la validità di campi inseriti di input.
 ha un parametro inputArray: un array di elementi del DOM (campi di input) da verificare
 la funzione ritorna un array di bool*/
+
 function dataValidation(inputArray) {
 
     /*definisco una variabile che sarà popolata con i valori booleani restituiti da map.
@@ -90,6 +91,7 @@ la funzione ha due parametri:
 1. inputCode: il codice sconto inserito dall'utente
 2. discountCodesArray: un array di codici da confrontare con il codice inputCode
 la funzione ritorna la percentuale di sconto da applicare*/
+
 function promoCodeCalc(inputCode, discountCodesArray) {
 
     //rimuovo le classi bootstrap .is-valid e is-invalid
