@@ -11,8 +11,8 @@ const finalPriceDec = document.getElementById('final-price-dec') //prendo elemen
 const validationElement = document.querySelectorAll('.cust-validation') //prendo dal DOM tutti gli elementi con classe .cust-validation (che richiedono validazione)
 const validationArray = Array.from(validationElement) //creo un array contenente tutti gli elementi del dom con classe .cust-validation
 
-let jobCost // creo una variabile jobCost per determinare il costo orario a seconda del valore di job
-let jobTime // creo una variabile jobTime per determinare il tempo di lavoro a seconda del valore di job
+let jobCost = 0// creo una variabile jobCost per determinare il costo orario a seconda del valore di job
+let jobTime = 0// creo una variabile jobTime per determinare il tempo di lavoro a seconda del valore di job
 
 const discounts = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24'] //creo un array contenente tutti i promo code validi
 
@@ -36,19 +36,19 @@ subBtn.addEventListener('click', function (event) {
 
     const discount = promoCodeCalc(promoCode, discounts) //definisco la variabile discount. valore è determinato dalla funzione promoCodeCalc. contestualmente viene fatta la validazione del capo form-promo
 
-    let output = 0 //definisco la variabile output, con valore default = 0
+    let rawPrice = 0 //definisco la variabile output, con valore default = 0
 
     if (!dataValidation(validationArray).includes(false)) { //effettuo la validazione dei campi di input. se nessuno è false, procedo con calcolo e stampa in pagina
-        output = (jobCost * jobTime) - (jobCost * jobTime * (discount / 100)) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
-        const outputArr = output.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa così ottenuta al punto, ricavando un array da 2 elementi
+        rawPrice = (jobCost * jobTime) - (jobCost * jobTime * (discount / 100)) //assegno alla variabile output il prezzo del lavoro, al netto di eventuali sconti
+        const rawPriceArr = rawPrice.toFixed(2).split('.') //imposto i decimali a 2 e divido la stringa così ottenuta al punto, ricavando un array da 2 elementi
 
         //riduco i centesimi a 0 
-        let decimal = outputArr[1] //assegno il secondo elemento dell'array (i decimali) ad una varibile
+        let decimal = rawPriceArr[1] //assegno il secondo elemento dell'array (i decimali) ad una varibile
         if (Number(decimal) !== 0) {
-            decimal = (Math.floor(Number(outputArr[1]) / 10) * 10) //traformo i decimali in un numero decimale e lo arrotondo per difetto. lo moltiplico poi per 10 per ottenere due cifre
+            decimal = (Math.floor(Number(rawPriceArr[1]) / 10) * 10) //traformo i decimali in un numero decimale e lo arrotondo per difetto. lo moltiplico poi per 10 per ottenere due cifre
         }
 
-        finalPrice.innerText = `€ ${outputArr[0]}` //stampo in pagina il prezzo output
+        finalPrice.innerText = `€ ${rawPriceArr[0]}` //stampo in pagina il prezzo output
         finalPriceDec.innerText = `,${decimal}` //stampo in pagina i decimali del prezzo output
         priceDiv.classList.remove('d-none') //rimuovo la classe d-none per mostrare l'elemento in pagina
 
@@ -66,7 +66,7 @@ function dataValidation(inputArray) {
     2.verificata la validità di input
     3.aggiunta una classe bootstrap che mostra la validazione in pagina*/
 
-    const outputArray = inputArray.map(function (input, index, array) {
+    const outputArray = inputArray.map(function (input) {
 
         //rimuovo le classi bootstrap is-valid e is-invalid per resettare eventuali validazioni preesistenti
         input.classList.remove('is-invalid')
